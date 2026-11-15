@@ -1,0 +1,8 @@
+// Prints one line per request, useful during the demo.
+module.exports = function requestLogger(req, res, next) {
+  const start = Date.now();
+  res.on('finish', () => {
+    console.log(`${req.method} ${req.originalUrl} -> ${res.statusCode} (${Date.now() - start}ms)`);
+  });
+  next();
+};
